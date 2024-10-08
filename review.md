@@ -17,7 +17,17 @@
     <button type="submit">送信</button>
 </form>
 ```
-123 $POST = ["connect" => "123"]
+
+formタグのaction属性で送信先のファイルのパス（store.php）を指定。送信ボタンを押した際にここで指定したファイルにデータの送信と同時に遷移（移動）を行う。
+method属性でどういった方法でデータを送信するかを指定。
+inputタグでフォーム内に表示する項目を指定する。
+type属性でtextを指定することで、1行の入力フィールドを作成。
+name属性で入力データを取得する。（$_POST['id']とし。出力したときに'名前'を表示する）
+value属性で123を指定することで、'id'の部分にあらかじめ123を指定している。
+textareaタグのname属性でフォームを送信したときの名前を'content'と設定し、'焼肉'を表示。
+buttonタグで送信ボタンを表示。
+
+store.phpの$_POSTには、name属性の'id'をキーとしてvalue属性の123を格納している。
 
 ### `require_once()` は何のために記述しているか説明してください。
 外部のファイルを読み込むときに使用。"require"と"require_once"があり、意味はどちらも同じだが、"require_once"は。同じファイルを複数回requireすることがない。そのため、関数の再定義や変数値の再代入をする場面にエラーが出ない.
@@ -51,12 +61,12 @@ catch(Expention $e)：エラー処理
 ## 新規作成
 
 ### `createTodoData($post)`は何をしているか説明してください。
-connection.phpで行ったDB操作に関する実装をされたとき、データを渡して処理を依頼する。
+connection.phpのDB操作に関する実装がされたとき、データを渡して処理を依頼している。
 
 ## 一覧
 
 ### `getTodoList()`の返り値について説明してください。
-functions.php で connection.php に記載した関数を呼び出すために実装しており、getAllRecords関数を返す。
+functions.php で connection.php に記載した関数を呼び出すために実装しており、getAllRecords関数を返す。getAllRecords関数はDBに対して作成したSQL文を実行し、fetchAll() で実行結果を全件配列で取得し結果を返すため、返り値はその結果の値。
 
 ### `<?= ?>`は何の省略形か説明してください。
 <?php echo ?>
