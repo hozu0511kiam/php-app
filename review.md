@@ -61,7 +61,8 @@ catch(Expention $e)：エラー処理
 ## 新規作成
 
 ### `createTodoData($post)`は何をしているか説明してください。
-connection.phpのDB操作に関する実装がされたとき、データを渡して処理を依頼している。
+functions.php で connection.php に記載した処理に登録したデータを渡している。
+connection.phpでは、まずDBへ接続する connectPdo関数を呼び出し、その返り値を$dbhに格納している。次の行でデータを登録するSQL文を作成し、$sql に格納。$sql を queryメソッドの引数の$sqlに渡して実行することで、INSERT文を実行する。
 
 ## 一覧
 
