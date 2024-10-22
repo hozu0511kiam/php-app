@@ -1,9 +1,12 @@
 <?php
 
+//DBへの接続 設定ファイル
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 set_error_handler('errorHandler');
+//エラーを出す
 function errorHandler($errNo, $errStr, $errFile, $errLine)
 {
     if ($errNo === E_NOTICE || $errNo === E_WARNING) {
@@ -17,6 +20,9 @@ function errorHandler($errNo, $errStr, $errFile, $errLine)
 
     return false;
 }
+
+//プログラム上で変更しない部分は定数として定義
+//define() — 名前を指定して定数を定義する (定数名,値)
 define('DSN', 'mysql:dbname=php_lesson;host=localhost;unix_socket=/tmp/mysql.sock');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '1105apple');

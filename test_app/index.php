@@ -1,5 +1,6 @@
 <?php
 require_once('functions.php');
+////functions.phpの関数を呼び出すことが可能
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,9 @@ require_once('functions.php');
         <th>削除</th>
       </tr>
       <?php foreach (getTodoList() as $todo): ?>
+      <!--HTMLと混在してPHPの処理を書くときのみforeach{}ではなく、: , endforeach;-->
         <tr>
+          <!-- echo の省略形 -->
           <td><?= $todo['id']; ?></td>
           <td><?= $todo['content']; ?></td>
           <td>
