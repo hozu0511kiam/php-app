@@ -10,7 +10,8 @@ require_once('functions.php');
 //name属性の'content'をキーとしてvalue属性を格納する
 
 // functions.php 内の createData関数 にPOSTデータを渡すことが可能に
-createData($_POST);
+//createData($_POST);
+savePostedData($_POST);
 header('Location: ./index.php');
 //header関数の引数を「Location：遷移先」にして実行
 //指定したパスに存在する指定したファイルに遷移することができる

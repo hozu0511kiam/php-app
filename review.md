@@ -52,7 +52,7 @@ header関数の引数を「Location：遷移先」にして実行すると、指
 ### `try catch`とは何か説明してください。
 例外処理を実装するための構文。
 try：エラーが発生する可能性のあるコード
-catch(Expention $e)：エラー処理
+catch(Exception $e)：エラー処理
 ファイル読み込みのエラー処理や接続、数学演算（÷0）などのエラーで例外が発生したときに、適切なメッセージを表示したり、エラー情報の詳細を表示することができる。
 
 ### Pdoクラスをインスタンス化する際に`try catch`が必要な理由を説明してください。
@@ -75,17 +75,35 @@ functions.php で connection.php に記載した関数を呼び出すために�
 ## 更新
 
 ### `getSelectedTodo($_GET['id'])`の返り値は何か、またなぜ`$_GET['id']` を引数に渡すのか説明してください。
+functions.phpでconnection.php に記載した関数を呼び出すために実装しており、getTodoTextById関数を返す。
+getTodoTextById関数では、現在todosテーブルに保存されている内容に当たる $data['content'] を返している。
+返された内容を$todoに格納し、HTMLに埋め込むことでDBに保存されているTODOの内容を表示している。
+'$_GET['id']' でURLクエリパラメータ（index.phpでURLのパラメータとして渡したid）を取得し、それをそのままfunctions.phpのgetSelectedTodo関数に渡すため。
 
 ### `updateTodoData($post)`は何をしているか説明してください。
+updateTodoData関数にPOSTデータを渡して呼び出すことでUPDATE処理を実行している。
 
 ## 削除
 
 ### `deleteTodoData($id)`は何をしているか説明してください。
+connectPdo関数 を呼びだし、返り値を $dbh に格納してDBとやりとりをする
+$now = date('Y-m-d H:i:s') 変数$nowにdate関数を代入し、現在時刻をdate関数で定義
+$sql = 'UPDATE todos SET deleted_at = "' . $now . '" WHERE id = ' . $id で変数$sqlにSQL文（文字列）を代入している
+UPDATE文でtodosテーブルの更新をして論理削除しdeleted_atカラムに$now変数を代入、一覧表示するgetAllRecordsの処理条件としてdeleted_atカラムがnullから除外
+$dbh->query($sql)で$sqlで取り出した要素を呼び出している
+
 
 ### `deleted_at`を現在時刻で更新すると一覧画面からToDoが非表示になる理由を説明してください。
+一覧表示するgetAllRecordsの処理条件としてdeleted_atカラムがnullであるときに表示されるので、条件から除外される
 
 ### 今回のように実際のデータを削除せずに非表示にすることで削除されたように扱うことを〇〇削除というか。
+論理削除：データ自体は残る「削除したことにする」処理
+
 
 ### 実際にデータを削除することを〇〇削除というか。
+物理削除：データ自体を完全に消去
+
 
 ### 前問のそれぞれの削除のメリット・デメリットについて説明してください。
+1論理削除は、データを消さないので元の状態に戻すことができるが、延々とデータが蓄積されていくので読み込みに影響を与える場合がある。
+2物理削除は、不要なデータが蓄積せず、コードを単純化できるが、データの復旧は不可能。
